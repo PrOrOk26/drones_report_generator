@@ -1,9 +1,8 @@
 import os
-from dotenv import load_dotenv
 import requests
+from dotenv import load_dotenv, find_dotenv
 
-BASEDIR = os.path.abspath(os.path.dirname(__file__))
-load_dotenv(os.path.join(BASEDIR, '.env'))
+load_dotenv(find_dotenv())
 
 AWS_LAMBDA_API_GATEWAY_URL = os.getenv(
     'AWS_LAMBDA_API_GATEWAY_URL')
