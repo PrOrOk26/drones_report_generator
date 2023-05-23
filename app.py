@@ -8,6 +8,7 @@ from services.aws.get_drones_data_by_date_range import get_drones_data_by_date_r
 from services.aws.save_drones_report import save_drones_report
 from services.reports.generate_drones_report import generate_drones_json_report
 from util.is_datetime_iso_valid import is_datetime_iso_valid
+from services.aws.send_report_creation_message import send_report_creation_message
 
 
 app = Flask(__name__)
@@ -66,6 +67,9 @@ def report():
 
     report = generate_drones_json_report(start_date, end_date, data)
     report_save_result = save_drones_report(report)
+
+    # send an event to notify the user (should've named it differently, no abstraction smth like notifyUser)
+    send_report_creation_message(report_save_result.get("objectUrl"))
     return {"reportUrl": report_save_result.get("objectUrl")}
 
 

@@ -1,9 +1,8 @@
 import psycopg2
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
-BASEDIR = os.path.abspath(os.path.dirname(__file__))
-load_dotenv(os.path.join(BASEDIR, '.env'))
+load_dotenv(find_dotenv())
 
 DB_HOST = os.getenv('DB_HOST')
 DB_PORT = os.getenv('DB_PORT')
